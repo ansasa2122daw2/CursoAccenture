@@ -1,6 +1,6 @@
 package ejercicio4Bucle;
 
-public class Fecha {
+public class Fecha3 {
 
 	public static void main(String[] args) {
 		System.out.println("-----Primera version: ");
@@ -53,21 +53,21 @@ public class Fecha {
 					case 12:
 						if(dia<=31) {
 							ok=true;
-							break;
 						}
+						break;
 					case 4:
 					case 6:
 					case 9:
 					case 11:
 						if (dia<= 30) {
 							ok=true;
-							break;
 						}
+						break;
 					case 2:
 						if(dia<=28) {
 							ok=true;
-							break;
 						}
+						break;
 					}
 					if(ok) {
 						System.out.println("Fecha correcta");
@@ -104,7 +104,7 @@ public class Fecha {
 		
 		if(mes>=1 && mes <=12) {
 			if (ano!=0) {
-				if ((ano%4==0 && ano%100!=0) | ano%400==0) {
+				if ((ano%4==0 && ano%100!=0) || ano%400==0) {
 					diaMes[1]=29;
 					}
 //				System.out.println(diaMes[mes-1]);

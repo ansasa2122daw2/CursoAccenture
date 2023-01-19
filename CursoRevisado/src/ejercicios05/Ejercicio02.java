@@ -1,6 +1,12 @@
-package ejercicio4Bucle;
+package ejercicios05;
 
-public class NotasSwitch {
+/**
+ * Switch case para la variable nota
+ * @author andrea.sanclemente
+ *
+ */
+
+public class Ejercicio02 {
 
 	public static void main(String[] args) {
 		int nota = 9;
@@ -20,6 +26,8 @@ public class NotasSwitch {
 			break;		
 		case 9: case 10:
 			System.out.println("Sobresaliente");
+			break;
+		default:
 			break;
 		}
 
