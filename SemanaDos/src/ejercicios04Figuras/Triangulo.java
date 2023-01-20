@@ -1,36 +1,42 @@
 package ejercicios04Figuras;
 
+/**
+ * Clase Triangulo que es hija de clase Formas
+ * @author andrea.sanclemente
+ *
+ */
+
 public class Triangulo extends Formas {
+private int base;
 	
-	public Triangulo(int x, int y) {
-		super(x, y);
+	public Triangulo(int altura, int anchura, int base) {
+		super(altura, anchura);
+		this.base = base;
 	}
 	
-	public Triangulo() {
-		super();
-	}
-	
-	@Override
-	public String adibujar() {
-		return "X: " + getX() + " Y: " + getY();
-	}
-	
-	@Override
-	public Integer aArea() {
-		return getX() * getY() / 2;
-	}
-	
-	public void dibujarTrian(Formas formas) {
-		Triangulo tria = (Triangulo) formas;
-		String mensaje = tria.adibujar();
-		System.out.println("Dibujar triangulo: " + mensaje);
+	public int getBase() {
+		return base;
 	}
 
-	public void areaTrian(Formas formas) {
-		Triangulo tria = (Triangulo) formas;
-		Integer mensaje = tria.aArea();
-		System.out.println("Calcular area Triangulo: " + mensaje);
+	public void setBase(int base) {
+		this.base = base;
 	}
 	
+	/**
+	 * Clases abstractas de la clase Formas
+	 */
+
+	@Override
+	public void dibujar() {
+		System.out.println("DIBUJO TRIANGULO = Altura: " + getAltura() + " Anchura: " + getAnchura() + " Base: " + getBase());
+
+	}
+
+	@Override
+	public void calcularArea() {
+		int calculo = getBase() * getAltura()/2;
+		System.out.println("El calculo de la área es: " + calculo);
+
+	}
 
 }

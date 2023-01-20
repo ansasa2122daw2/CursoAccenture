@@ -1,29 +1,28 @@
 package ejercicios04Figuras;
 
+/**
+ * Clase Main donde llamamos a las otras clases
+ * @author andrea.sanclemente
+ *
+ */
+
 public class MainFiguras {
 
 	public static void main(String[] args) {
-		Rectangulo rect = new Rectangulo();
+		Rectangulo rect = new Rectangulo(2, 9);
 		
-		rect.setX(25);
-		rect.setY(15);
+		rect.dibujar();
+		rect.calcularArea();
 		
-		rect.dibujarRect(rect);
-		rect.areaRect(rect);
+		Triangulo trian = new Triangulo(20,24,10);
 		
-		Triangulo trian = new Triangulo();
+		trian.dibujar();
+		trian.calcularArea();
 		
-		trian.setX(45);
-		trian.setY(15);
+		Circulo circ = new Circulo(10,15,5);
 		
-		trian.dibujarTrian(trian);
-		trian.areaTrian(trian);
-		
-		Circulo circ = new Circulo();
-		
-		circ.setRadio(5);
-		
-		circ.areaCirc(circ);
+		circ.dibujar();
+		circ.calcularArea();
 
 	}
 

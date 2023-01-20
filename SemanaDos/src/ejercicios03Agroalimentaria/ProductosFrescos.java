@@ -1,16 +1,19 @@
-package ejercicios03;
+package ejercicios03Agroalimentaria;
+
+/**
+ * Clase ProductosFrescos hija de la clase Productos
+ * @author andrea.sanclemente
+ *
+ */
 
 public class ProductosFrescos extends Productos{
 	private String fechaEnvasado;
 	private String paisOrigen;
 	
-	public ProductosFrescos() {
-	}
-
 	public ProductosFrescos(String fechaCaducidad, int numLote, String fechaEnvasado, String paisOrigen) {
 		super(fechaCaducidad, numLote);
-		this.fechaEnvasado = fechaEnvasado;
-		this.paisOrigen = paisOrigen;
+		this.setFechaEnvasado(fechaEnvasado);
+		this.setPaisOrigen(paisOrigen);
 	}
 
 	public String getFechaEnvasado() {
@@ -29,14 +32,12 @@ public class ProductosFrescos extends Productos{
 		this.paisOrigen = paisOrigen;
 	}
 	
-	public String aString() {
-		return "fechaCaducidad=" + getFechaCaducidad() + ", numLote=" + getNumLote();
-	}
-	
-	public void productosFrescos(Productos pro) {
-		ProductosFrescos cong = (ProductosFrescos) pro;
-		String mensaje = cong.aString();
-		System.out.println(mensaje + " fechaEnvasado: " + getFechaEnvasado() + ", paisOrigen: " + getPaisOrigen());
+	/**
+	 * método abstracto de Productos
+	 */
+	public void info() {
+		System.out.println("Productos frescos -->");
+		System.out.println("Fecha caducidad: " + getFechaCaducidad() + " Número lote: " + getNumLote() + " Fecha envasado: " + getFechaEnvasado() + " Pais Origen: " + getPaisOrigen());
 	}
 
 }

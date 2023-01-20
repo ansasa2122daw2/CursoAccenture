@@ -1,47 +1,42 @@
 package ejercicios04Figuras;
 
-import ejercicios03.ProductosCongelados;
+/**
+ * Clase Rectangulo hija de la clase Formas
+ * @author andrea.sanclemente
+ *
+ */
 
 public class Rectangulo extends Formas{
-	private int area;
+	int i= 0;
+	int j= 0;
 	
-	public Rectangulo(int x, int y, int area) {
-		super(x, y);
-		this.area = area;
-	}
-	
-	public Rectangulo() {
-		super();
-	}
-
-	public int getArea() {
-		return area;
-	}
-
-	public void setArea(int area) {
-		this.area = area;
+	public Rectangulo(int altura, int anchura) {
+		super(altura, anchura);
+		
 	}
 	
+	/**
+	 * Clases abstractas de la clase Formas
+	 */
 	@Override
-	public String adibujar() {
-		return "X: " + getX() + " Y: " + getY();
-	}
-	
-	@Override
-	public Integer aArea() {
-		return getX() * getY();
-	}
-	
-	public void dibujarRect(Formas formas) {
-		Rectangulo rect = (Rectangulo) formas;
-		String mensaje = rect.adibujar();
-		System.out.println("Dibujar rectangulo: " + mensaje);
+	public void dibujar() {
+		System.out.println("DIBUJO RECTANGULO = Altura: " + getAltura() + " Anchura: " + getAnchura());
+		while(i<getAltura()) {
+			while(j<getAnchura()) {
+				System.out.print("*");
+				j++;
+			}
+			System.out.println();
+			j=0;
+			i++;
+		}
 	}
 
-	public void areaRect(Formas formas) {
-		Rectangulo rect = (Rectangulo) formas;
-		Integer mensaje = rect.aArea();
-		System.out.println("Calcular area rectangulo: " + mensaje);
+	@Override
+	public void calcularArea() {
+		int calculo = getAltura() * getAnchura();
+		System.out.println("El calculo de la área del rectangulo es: " + calculo);
+
 	}
 	
 	

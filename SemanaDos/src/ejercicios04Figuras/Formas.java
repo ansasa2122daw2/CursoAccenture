@@ -1,37 +1,43 @@
 package ejercicios04Figuras;
 
+/**
+ * Clase Formas que es abstracta porque comparte métodos con las clases hijas
+ * @author andrea.sanclemente
+ *
+ */
+
 public abstract class Formas {
-	private int x;
-	private int y;
+	private int altura;
+	private int anchura;
 	
-	public abstract String adibujar();
-	public abstract Integer aArea();
-	
-	public Formas(int x, int y) {
+	public Formas(int altura, int anchura) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.altura = altura;
+		this.anchura = anchura;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
+
+	public int getAnchura() {
+		return anchura;
+	}
+
+	public void setAnchura(int anchura) {
+		this.anchura = anchura;
 	}
 	
-	public Formas() {
-		super();
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
+	/**
+	 * métodos abstractos sin body
+	 */
+	
+	public abstract void dibujar();
+	public abstract void calcularArea();
 	
 	
 }

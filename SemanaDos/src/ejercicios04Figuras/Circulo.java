@@ -1,16 +1,19 @@
 package ejercicios04Figuras;
 
-public class Circulo extends Formas{
-	private int radio;
+/**
+ * Clase Circulo que es clase hija de Formas
+ * @author andrea.sanclemente
+ *
+ */
 
-	public Circulo(int x, int y, int radio) {
-		super(x, y);
+public class Circulo extends Formas{
+private int radio;
+	
+	public Circulo(int altura, int anchura, int radio) {
+		super(altura, anchura);
 		this.radio = radio;
 	}
 	
-	public Circulo() {
-	}
-
 	public int getRadio() {
 		return radio;
 	}
@@ -19,25 +22,20 @@ public class Circulo extends Formas{
 		this.radio = radio;
 	}
 	
-	@Override
-	public String adibujar() {
-		return "X: " + getX() + " Y: " + getY();
-	}
+	/**
+	 * métodos abstractos de la clase Formas
+	 */
 	
 	@Override
-	public Integer aArea() {
-		return "";
-	}
-	
-	public void dibujarCirc(Formas formas) {
-		Triangulo tria = (Triangulo) formas;
-		String mensaje = tria.adibujar();
-		System.out.println("Dibujar triangulo: " + mensaje);
+	public void dibujar() {
+		System.out.println("DIBUJO CIRCULO = Altura: " + getAltura() + " Anchura: " + getAnchura() + " Radio: " + getRadio());
 	}
 
-	public void areaCirc(int radio) {
-		double area = Math.PI * (radio * radio);
-		System.out.println("Calcular area Triangulo: " + area);
+	@Override
+	public void calcularArea() {
+		int calculo = (int) (Math.PI * getRadio() * getRadio());
+		System.out.println("El calculo de la área es: " + calculo);
+
 	}
 
 }
