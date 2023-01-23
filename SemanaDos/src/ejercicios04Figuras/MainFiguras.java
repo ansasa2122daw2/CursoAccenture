@@ -24,6 +24,17 @@ public class MainFiguras {
 		circ.dibujar();
 		circ.calcularArea();
 
+		/** 
+		 * Clase Punto cambiado con Figuras
+		 */
+		Formas form = new Rectangulo();
+		Punto punto = new Punto(6,3);
+		form.setPunt(punto);
+		form.getPunt().inverse(6,6);
+		
+
 	}
+	
+	
 
 }

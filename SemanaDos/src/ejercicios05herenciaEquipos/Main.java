@@ -40,6 +40,26 @@ public class Main {
 		
 		lista.forEach(prent-> System.out.println(prent));
 		
+		/**
+		 * Propuesta profesor
+		 */
+		
+		lista.forEach(actual-> {
+			actual.concentrarse();
+			actual.viajar();
+			if (actual instanceof Entrenador) {
+				((Entrenador) actual).dirigirPartido();
+				((Entrenador) actual).dirigirEntrenamiento();
+			}
+			if (actual instanceof Futbolista) {
+				((Futbolista) actual).jugarPartido();
+				((Futbolista) actual).entrenar();
+			}
+			if (actual instanceof Masajista) {
+				((Masajista) actual).darMasaje();
+			}
+		});
+		
 	}
 
 }

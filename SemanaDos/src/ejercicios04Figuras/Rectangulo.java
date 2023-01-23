@@ -15,6 +15,10 @@ public class Rectangulo extends Formas{
 		
 	}
 	
+	public Rectangulo() {
+		
+	}
+
 	/**
 	 * Clases abstractas de la clase Formas
 	 */
