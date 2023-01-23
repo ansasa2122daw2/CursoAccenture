@@ -1,4 +1,10 @@
-package ejercicios05;
+package ejercicios05herenciaEquipos;
+
+/**
+ * Clase Padre abstracta
+ * @author andrea.sanclemente
+ *
+ */
 
 public abstract class Equipo {
 	private int id;
@@ -12,6 +18,9 @@ public abstract class Equipo {
 		Nombre = nombre;
 		Apellidos = apellidos;
 		this.edad = edad;
+	}
+
+	public Equipo() {
 	}
 
 	public int getId() {
@@ -46,6 +55,19 @@ public abstract class Equipo {
 		this.edad = edad;
 	}
 	
+	/**
+	 * Método toString
+	 */
+	
+	@Override
+	public String toString() {
+		return "Equipo [id=" + id + ", Nombre=" + Nombre + ", Apellidos=" + Apellidos + ", edad=" + edad + "]";
+	}
+	
+	/**
+	 * Métodos abtractos
+	 */
+
 	public abstract void concentrarse();
 	public abstract void viajar();
 	

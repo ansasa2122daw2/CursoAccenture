@@ -1,4 +1,10 @@
-package ejercicios05;
+package ejercicios05herenciaEquipos;
+
+/**
+ * Clase Futbolista que extiende de Equipo
+ * @author andrea.sanclemente
+ *
+ */
 
 public class Futbolista extends Equipo {
 	private int dorsal;
@@ -25,23 +31,42 @@ public class Futbolista extends Equipo {
 	public void setDemarcacion(String demarcacion) {
 		this.demarcacion = demarcacion;
 	}
+	
+	/**
+	 * Métodos abstractos de la clase Equipo
+	 */
 
 	@Override
 	public void concentrarse() {
-		// TODO Auto-generated method stub
+		System.out.println(getNombre() + " (futbolista) concentrandose");
 	}
 
 	@Override
 	public void viajar() {
-		// TODO Auto-generated method stub
+		System.out.println(getNombre() +" (futbolista) viajando a...");
 	}
 	
+	/**
+	 * Métodos creados para esta clase
+	 */
+	
 	public void jugarPartido() {
-		
+		System.out.println(getNombre() + " (futbolista) jugando partido");
 	}
 	
 	public void entrenar() {
-		
+		System.out.println( getNombre() + " (futbolista) entrenando \n");
 	}
+	
+	/**
+	 * Método toString
+	 */
+
+	@Override
+	public String toString() {
+		return super.toString() + "Futbolista [dorsal=" + dorsal + ", demarcacion=" + demarcacion + "]";
+	}
+	
+	
 
 }
