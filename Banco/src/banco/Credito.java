@@ -24,6 +24,10 @@ public class Credito extends Tarjeta {
 		super(mFechaDeCaducidad, mNumero, mTitular);
 	}
 	
+	public Credito() {
+		
+	}
+	
 	public double getCreditoDisponible() {
 		return mCredito + getSaldo();
 	}

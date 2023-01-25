@@ -16,7 +16,7 @@ import bancoFiltros.Filtros;
  *
  */
 
-public class Cuenta{
+public class Cuenta extends Exception{
 	private List<Movimiento> mMovimientos = new ArrayList<Movimiento>(); //Lo inicio aquí
 	private String mTitular;
 	private String mNumero;

@@ -17,11 +17,21 @@ public class Filtros {
 	public static boolean filtroString(String texto, int maxLong, int minLong) {
 		return (texto.length()<= maxLong) && (texto.length()>= minLong);
 	}
-		public static boolean filtroFecha(LocalDate fecha, LocalDate fMax, LocalDate fMin) {
-			LocalDate hoy = LocalDate.now();
-			fMax = hoy.plusYears(MAXFECHA);
-			fMin = hoy.plusYears(MINFECHA);
-		return false;
+	public static boolean filtroFecha(LocalDate fecha, LocalDate fMax, LocalDate fMin) {
+		LocalDate hoy = LocalDate.now();
+		if(fecha.compareTo(fMax) == MAXFECHA) {
+			return false;
+		}
+		if(fecha.compareTo(fMin) == MINFECHA) {
+			return false;
+		}
+//		if(fecha.plusYears(MAXFECHA) != fMax.getYear()) {
+//			return true;
+//		}
+//		if (fecha.minusYears(MAXFECHA) != null) {
+//			return true;
+//		}
+	return true;
 	}
 	
 	public static boolean filtroDinero(double din, int maxLong, int minLong) {
