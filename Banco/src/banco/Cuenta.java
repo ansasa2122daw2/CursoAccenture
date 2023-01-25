@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Vector;
 
 import bancoExcepciones.MiExcepcion;
+import bancoFiltros.FiltroExcepciones;
+import bancoFiltros.Filtros;
 
 /**
  * Clase Cuenta 
@@ -18,6 +20,8 @@ public class Cuenta{
 	private List<Movimiento> mMovimientos = new ArrayList<Movimiento>(); //Lo inicio aquí
 	private String mTitular;
 	private String mNumero;
+	private final int XMAX = 100;
+	private final int XMIN = 10;
 	
 	public Cuenta(String mTitular, String mNumero) {
 		super();
@@ -35,7 +39,6 @@ public class Cuenta{
 			for (Movimiento movi : mMovimientos) {
 				forSaldo += movi.getmImporte();
 			}
-			System.out.println(forSaldo);
 			return forSaldo;
 	}
 
@@ -44,9 +47,11 @@ public class Cuenta{
 		if(x>0) {
 			mov.setmImporte(x);
 			addMovi(mov);
-			System.out.println("AÑADIDO " + x);
-		}else {
-			throw new MiExcepcion("Error al añadir");
+			if(Filtros.filtroDinero(x, XMAX, XMIN)) {
+				System.out.println(mov.getmFecha() +  "\tIngresar cuenta-> " + x + "\t Saldo ->"+  getSaldo());
+			}else {
+				throw new MiExcepcion("Error, cantidad");
+			}
 		}
 	}
 	
@@ -59,28 +64,50 @@ public class Cuenta{
 		mMovimientos.add(mov);
 	}
 	
+	/**
+	 * Método ingresar con excepción y excepción de filtro con mensaje propio
+	 * @param concepto
+	 * @param x
+	 */
+	
 	public void ingresar(String concepto, double x) {
 		Movimiento mov = new Movimiento();
-		if (x>0) {
-			mov.setmImporte(x);	
-			mov.setmConcepto(concepto);
-			addMovi(mov);
-		}else {
-			throw new MiExcepcion("Error");
+		mov.setmImporte(x);	
+		mov.setmConcepto(concepto);
+		addMovi(mov);
+		
+		if (FiltroExcepciones.conceptoFiltroError(concepto,x)) {
+			System.out.println(mov.getmFecha() +  "\tIngresar cuenta-> " + concepto + x + "\t Saldo ->"+  getSaldo());
 		}
-
-		System.out.println(concepto + "AÑADIDO " + x);
 	}
+
 
 	public void retirar(double x) {
 		if (x > 0) {
 			Movimiento mov = new Movimiento();
 			mov.setmImporte(- x);
 			addMovi(mov);
-			System.out.println("RETIRADA " + x);
+			System.out.println(mov.getmFecha() +  "\tRetirar cuenta-> " + x + "\t Saldo ->"+  getSaldo());
 		}else {
 			throw new MiExcepcion("Error retirada dinero");
 		}
+	}
+	
+	/**
+	 * Método retirar con excepción y excepción de filtro con mensaje propio
+	 * @param concepto
+	 * @param x
+	 */
+	
+	public void retirar(String concepto, double x) {
+			Movimiento mov = new Movimiento();
+			mov.setmImporte(- x); //- delante para restar
+			mov.setmConcepto(concepto);
+			addMovi(mov);
+			if (FiltroExcepciones.conceptoFiltroError(concepto,x)) {
+				System.out.println(mov.getmFecha() +  "\tRetirar cuenta-> " + concepto + x + "\t Saldo ->"+  getSaldo());
+			}
+
 	}
 
 	public List<Movimiento> getmMovimientos() {
@@ -107,5 +134,4 @@ public class Cuenta{
 		this.mNumero = mNumero;
 	}
 	
-
 }

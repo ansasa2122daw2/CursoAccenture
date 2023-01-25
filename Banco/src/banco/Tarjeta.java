@@ -69,8 +69,7 @@ public abstract class Tarjeta {
 
 	@Override
 	public String toString() {
-		return "Tarjeta [mCuentaAsociada=" + mCuentaAsociada + ", mFechaDeCaducidad=" + mFechaDeCaducidad + ", mNumero="
-				+ mNumero + ", mTitular=" + mTitular + "]";
+		return mFechaDeCaducidad + " ";
 	}
 
 

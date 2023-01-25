@@ -15,6 +15,8 @@ import bancoExcepciones.MiExcepcion;
  */
 
 public class Credito extends Tarjeta {
+	private final double COMISION = 0.05;
+	private final double MIN_COMISION = 3.0;
 	private double mCredito;
 	private List<Movimiento> mMovimientos = new ArrayList<Movimiento>(); //Lo inicio aquí
 	
@@ -36,8 +38,6 @@ public class Credito extends Tarjeta {
 		for (Movimiento movi : mMovimientos) {
 			forSaldo += movi.getmImporte();
 		}
-		System.out.println("Mostrar tarjeta CREDITO -> " + toString());
-		System.out.println(forSaldo);
 		return forSaldo;
 	}
 
@@ -47,8 +47,7 @@ public class Credito extends Tarjeta {
 		if(x>0) {
 			mov.setmImporte(x);
 			addMovi(mov);
-			System.out.println("Ingresar tarjeta CREDITO -> " + toString());
-			System.out.println("AÑADIDO " + x);
+			System.out.println(toString() +  "\tIngresar credito-> " + x + "\t Saldo ->"+  getSaldo());
 		}else {
 			throw new MiExcepcion("Error ingresar dinero");
 		}
@@ -56,34 +55,46 @@ public class Credito extends Tarjeta {
 	}
 	
 	public void liquidar(int mes, int ano) {
+		Movimiento liq = new Movimiento();
+		System.out.println("Liquidación tarjeta del mes: " + mes + " y año: " + ano);
 		double r= 0;
 		//Corrección profesor
 		for (Iterator it = mMovimientos.iterator(); it.hasNext();) {
 			Movimiento m = (Movimiento) it.next();
 			if(m.getmFecha().getMonthValue() == mes && m.getmFecha().getYear() == ano) {
-				r += m.getmImporte();
+				r += m.getmImporte(); //para el total
 				it.remove();
 			}
+		}
+		liq.setmImporte(r);
+		System.out.println(toString() + "\t Saldo ->"+  getSaldo());
+		if (r != 0) {
+			mMovimientos.add(liq);
+			
+
 		}
 	}
 
 	@Override
 	public void pagoEnEstablecimiento(String datos, double x) {
-		System.out.println("Compra a crédito en: ");
+		Movimiento movi = new Movimiento();
+		movi.setmFecha(mFechaDeCaducidad);
+		movi.setmConcepto(datos);
+		movi.setmImporte(x);
+		mMovimientos.add(movi);
+		System.out.println(toString() +  "\tPago en establecimiento credito-> "+ datos + x + "\t Saldo ->"+  getSaldo());
 
 	}
 
 	@Override
 	public void retirar(double x) {
-		if (x > 0) {
-			Movimiento mov = new Movimiento();
-			mov.setmImporte(- x);
-			addMovi(mov);
-			System.out.println("Retirar tarjeta CREDITO -> " + toString());
-			System.out.println("RETIRADA " + x);
-		}else {
-			throw new MiExcepcion("Error retirada dinero");
+		if (x > 0 ) {
+			x = x + (x * COMISION < MIN_COMISION ? MIN_COMISION : x * COMISION);
 		}
+		Movimiento mov = new Movimiento();
+		mov.setmImporte(- x);
+		addMovi(mov);
+		System.out.println(toString() +  "\tRetirada credito-> " + x + "\t Saldo ->"+  getSaldo());
 	}
 
 	public double getmCredito() {
