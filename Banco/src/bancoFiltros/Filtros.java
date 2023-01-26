@@ -1,8 +1,13 @@
 package bancoFiltros;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Clase para filtros, strings mayor que 20 y menor que 30
@@ -26,10 +31,25 @@ public class Filtros {
 	 * @return LocalDate con la fecha, si es correcto o null
 	 */
 	
-	public static LocalDate fechaCorrecta(String fecha) {
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate dateTime = LocalDate.parse(fecha, format);
-		return dateTime;
+	public static LocalDate fechaCorrecta(String fecha) throws Exception {
+
+		DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		DateTimeFormatter formate2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		if(fecha.contains("/")) {
+			System.out.println("FUNCIONA CON /");
+			LocalDate dateTime2 = LocalDate.parse(fecha, formate2);
+			return dateTime2;
+		}
+		
+		try {
+			LocalDate dateTime = LocalDate.parse(fecha, formate);
+			System.out.println("FUNCIONA CON -");
+			return dateTime;
+		}catch(DateTimeParseException e) {
+			System.out.println("NULL");
+			return null;
+		}
 	}
 	
 	public static boolean filtroString(String texto, int maxLong, int minLong) {

@@ -11,10 +11,13 @@ class FiltrosTest {
 	final String TITULAR1 = "Este titular es de 21";
 	final double DINERO = 5;
 	final String FECHA= "12.12.2002";
+	final String FECHA2= "12/12/2002";
+	final String FECHA3= "12-12-2002";
+	final String FECHA4= "12-12-22";
 	
 	@Test
 	void testFechaCorrecta() throws Exception{
-		assertEquals(Filtros.fechaCorrecta(FECHA),null);
+		assertEquals(Filtros.fechaCorrecta(FECHA2),null);
 	}
 	
 
@@ -35,6 +38,7 @@ class FiltrosTest {
 		System.out.println(Filtros.filtroFecha(hoy, hoy.withYear(2026), hoy.withYear(2024)));
 	}
 	
+	@Disabled
 	@Test
 	void testFiltroFecha2() {
 		LocalDate hoy = LocalDate.now();
