@@ -10,6 +10,12 @@ import org.junit.jupiter.api.Test;
 class FiltrosTest {
 	final String TITULAR1 = "Este titular es de 21";
 	final double DINERO = 5;
+	final String FECHA= "12.12.2002";
+	
+	@Test
+	void testFechaCorrecta() throws Exception{
+		assertEquals(Filtros.fechaCorrecta(FECHA),null);
+	}
 	
 
 	@Test

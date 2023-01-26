@@ -1,6 +1,8 @@
 package bancoFiltros;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Clase para filtros, strings mayor que 20 y menor que 30
@@ -15,6 +17,20 @@ import java.time.LocalDate;
 public class Filtros {
 	private static int MAXFECHA = 3;
 	private static int MINFECHA = 5;
+	
+	/**
+	 * Comprueba si el formato de entrada de fecha es correcto
+	 * Se puede indicar el formato, o asumira "dd-MM-yyyy"
+	 * @param fecha
+	 * @param formato opcional
+	 * @return LocalDate con la fecha, si es correcto o null
+	 */
+	
+	public static LocalDate fechaCorrecta(String fecha) {
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate dateTime = LocalDate.parse(fecha, format);
+		return dateTime;
+	}
 	
 	public static boolean filtroString(String texto, int maxLong, int minLong) {
 		return (texto.length()<= maxLong) && (texto.length()>= minLong);
