@@ -16,12 +16,9 @@ public class Main {
 		//Pruebas con los métodos de cuenta
 		Cuenta cuent = new Cuenta("123456", "Andrea Sánchez");
 		System.out.println("\n------------Movimientos en la cuenta------------");
-		cuent.getSaldo();
 		//cuent.ingresar(500); //Ejemplo error filtro de ingresar más dinero
 		//cuent.ingresar("ingre", 200); //Ejemplo error filtro de concepto
-		cuent.getSaldo();
-		cuent.retirar("Pago realizado a Aliexpress", 100);
-		cuent.getSaldo();
+		cuent.retirar("Pago realizado a Aliexpress ", 100);
 		
 		//Prueba con los métodos de debito | Primero haciendo setCuenta 
 		Debito deb = new Debito(hoy, "123456", "Andrea");

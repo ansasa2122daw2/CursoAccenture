@@ -36,10 +36,18 @@ public class Cuenta extends Exception{
 
 	public double getSaldo() {
 		double forSaldo = 0;
-			for (Movimiento movi : mMovimientos) {
-				forSaldo += movi.getmImporte();
-			}
-			return forSaldo;
+//		for (Movimiento movi : mMovimientos) {
+//			forSaldo += movi.getmImporte();
+//		}
+//		return forSaldo;
+			
+		//ejemplo stream
+		
+		forSaldo = mMovimientos.stream()
+				.map(mov -> mov.getmImporte())
+				.reduce(0d, (subtotal, element) -> subtotal + element);
+		
+		return forSaldo;
 	}
 
 	public void ingresar(double x){

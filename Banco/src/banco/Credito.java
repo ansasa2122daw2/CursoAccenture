@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import bancoExcepciones.MiExcepcion;
 
@@ -60,23 +61,37 @@ public class Credito extends Tarjeta {
 	
 	public void liquidar(int mes, int ano) {
 		Movimiento liq = new Movimiento();
-		System.out.println("Liquidación tarjeta del mes: " + mes + " y año: " + ano);
-		double r= 0;
-		//Corrección profesor
-		for (Iterator it = mMovimientos.iterator(); it.hasNext();) {
-			Movimiento m = (Movimiento) it.next();
-			if(m.getmFecha().getMonthValue() == mes && m.getmFecha().getYear() == ano) {
-				r += m.getmImporte(); //para el total
-				it.remove();
+		//liquidacion con stream (profesor)
+		
+		double r = mMovimientos.stream()
+				.filter(m->m.getmFecha().getMonthValue() == mes && m.getmFecha().getYear() == ano)
+				.map(mov -> mov.getmImporte())
+				.reduce(0d, (subtotal, element) -> subtotal + element);
+		mMovimientos = mMovimientos.stream()
+				.filter(m ->!(m.getmFecha().getMonthValue() == mes && m.getmFecha().getYear() == ano))
+				.collect(Collectors.toList());
+				
+			liq.setmImporte(r);
+			System.out.println(toString() + "\tLiquidación credito Saldo->"+  getSaldo());
+			if (r != 0) {
+				mMovimientos.add(liq);
 			}
-		}
-		liq.setmImporte(r);
-		System.out.println(toString() + "\t Saldo ->"+  getSaldo());
-		if (r != 0) {
-			mMovimientos.add(liq);
-			
-
-		}
+		
+//		System.out.println("Liquidación tarjeta del mes: " + mes + " y año: " + ano);
+//		double r= 0;
+//		//Corrección profesor
+//		for (Iterator it = mMovimientos.iterator(); it.hasNext();) {
+//			Movimiento m = (Movimiento) it.next();
+//			if(m.getmFecha().getMonthValue() == mes && m.getmFecha().getYear() == ano) {
+//				r += m.getmImporte(); //para el total
+//				it.remove();
+//			}
+//		}
+//		liq.setmImporte(r);
+//		System.out.println(toString() + "\t Saldo ->"+  getSaldo());
+//		if (r != 0) {
+//			mMovimientos.add(liq);
+//		}
 	}
 
 	@Override
@@ -98,7 +113,7 @@ public class Credito extends Tarjeta {
 		Movimiento mov = new Movimiento();
 		mov.setmImporte(- x);
 		addMovi(mov);
-		System.out.println(toString() +  "\tRetirada credito-> " + x + "\t Saldo ->"+  getSaldo());
+		System.out.println(toString() +  "\tRetirada credito-> " + x + "\t\t Saldo ->"+  getSaldo());
 	}
 
 	public double getmCredito() {
