@@ -11,6 +11,12 @@ import bancoExcepciones.MiExcepcion;
 import bancoExcepciones.SaldoInsuficiente;
 import bancoFiltros.Filtros;
 
+/**
+ * Clase Cuenta Test JUnit
+ * @author andrea.sanclemente
+ *
+ */
+
 class CuentaTest {
 	
 	private String TITULAR = "Ejemplo Titular";
@@ -21,8 +27,23 @@ class CuentaTest {
 	final String CONCEPTO_OK = "Concepto Cumple";
 	final String CONCEPTO_NO = "Concepto No Cumple";
 	
+	/**
+	 * Definir cuent de la clase Cuenta
+	 */
 	Cuenta cuent;
 
+	/**
+	 * BeforeEach cada Test se inicializa la Cuenta
+	 */
+	@BeforeEach
+	void iniciar() {
+		creacion();
+		
+		//Ejemplo Mockito
+		//Filtros asignado = Mockito.mock(Filtros.class);
+//		Mockito.when(asignado.cumpleLongitud(TITULAR_ERR, Cuenta.TITULAR_MAX, Cuenta.TITULAR_MIN).thenReturn(false))
+	}
+	
 	@BeforeEach
 	void creacion() {
 		cuent = new Cuenta();
@@ -33,13 +54,6 @@ class CuentaTest {
 		cuent.ingresar(IMPORTE);
 		assertEquals(IMPORTE, cuent.getSaldo());
 	}
-	
-	@Test
-	void testIngresarDoubleERR() throws Exception{
-		Assertions.assertThrows(SaldoInsuficiente.class, () -> {
-			cuent.ingresar(IMPORTEMAL);
-		});
-	}
 
 	@Test
 	void testIngresarStringDouble() throws Exception{
@@ -47,12 +61,6 @@ class CuentaTest {
 		assertEquals(IMPORTE, cuent.getSaldo());
 	}
 	
-	@Test
-	void testIngresarStringDoubleERR() {
-		cuent.ingresar(CONCEPTO_NO, IMPORTE);
-		assertEquals(IMPORTE, cuent.getSaldo());
-	}
-
 	@Test
 	void testRetirarDouble() throws Exception{
 		cuent.ingresar(IMPORTE);

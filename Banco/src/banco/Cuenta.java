@@ -42,7 +42,7 @@ public class Cuenta extends Exception{
 			return forSaldo;
 	}
 
-	public void ingresar(double x) {
+	public void ingresar(double x){
 		Movimiento mov = new Movimiento();
 		if(x>0) {
 			mov.setmImporte(x);
@@ -70,7 +70,7 @@ public class Cuenta extends Exception{
 	 * @param x
 	 */
 	
-	public void ingresar(String concepto, double x) {
+	public void ingresar(String concepto, double x){
 		Movimiento mov = new Movimiento();
 		mov.setmImporte(x);	
 		mov.setmConcepto(concepto);

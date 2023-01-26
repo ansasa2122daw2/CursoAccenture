@@ -19,7 +19,7 @@ public class Debito extends Tarjeta {
 	}
 
 	@Override
-	public void ingresar(double x){	
+	public void ingresar(double x) {	
 		this.mCuentaAsociada.ingresar(x);
 
 	}

@@ -40,6 +40,7 @@ class CreditoTest {
 	void testGetCreditoDisponible() {
 		double calcular;
 		calcular = cred.getmCredito() + cred.getSaldo();
+		assertEquals(cred.getCreditoDisponible(), cred.getSaldo());
 	}
 
 	@Test
