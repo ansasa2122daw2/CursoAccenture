@@ -1,6 +1,7 @@
 package es.rf.tienda.util;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 
@@ -9,10 +10,10 @@ import java.time.LocalDate;
  * 
  * DESCRIPCION: 
  * 			Clase auxiliar para validar los datos que sean 
- * 			introducidos en la aplicaci�n.
+ * 			introducidos en la aplicación.
  * 
- *  @version	30/01/2023 
- *  @author 	Miguel Garcia
+ *  @version	27/01/2023
+ *  @author 	Andrea Sánchez
  *  
  * ******************************************************************************************/
 public class Validator {
@@ -59,37 +60,45 @@ public class Validator {
 	 * 
 	 * @return  true, si cumple solo contiene caracters alfanum�ricos. <br> 
 	 * 			false en caso contrario
-	 * FECHA: Enero 2023
-	 * 
-	 * AUTOR: Miguel Garcia - Barcelona
+	 *	@version	27/01/2023
+	 *  @author 	Andrea Sánchez
 	 * 
 	 * **************************************************************************************/
 	public static boolean isAlfanumeric(String texto){
-		return true;
+		if (texto.matches(ALFANUMERIC_PATTERN)) {
+			return true;
+		}
+		return false;
 	}
 	
 	public static boolean isVacio( String prueba ){
-		return true;
+		if(prueba != null && prueba.isEmpty()) {
+			return true;
+		}
+		return false;
 	}
 	
 	/* ***************************************************************************************
 	 * NOMBRE: cumplePhoneNumber                                                                 *
 	 * 
 	 * DESCRIPCI�N: *//**
-	 * 		El phone number debe tener un total de entre 10 y 20, contando d�gitos y espacios.
-	 * 		M�nimo aceptable son 10 d�gitos.
+	 * 		El phone number debe tener un total de entre 10 y 20, contando dígitos y espacios.
+	 * 		Mínimo aceptable son 10 dígitos.
 	 * 
-	 * @param phoneNumber String con el n�mero de telefono de entre 10 y 20 d�gitos. 
-	 * 		Puede tener espacios, pero siempre con 10 d�gitos como m�nimo.
+	 * @param phoneNumber String con el número de telefono de entre 10 y 20 dígitos. 
+	 * 		Puede tener espacios, pero siempre con 10 dígitos como mínimo.
 	 * 
 	 * @return true, si cumple todas las condiciones
 	 *
-	 * FECHA: Enero 2023
-	 * AUTOR: Miguel Garcia
+	 *	@version	27/01/2023
+	 *  @author 	Andrea Sánchez
 	 * 
 	 * **************************************************************************************/
 	public static boolean cumplePhoneNumber(String phoneNumber){
-		return true;
+		if(phoneNumber.matches(PHONE_PATTERN)) {
+			return true;
+		}
+		return false;
 	}
 
 	/* ***************************************************************************************
@@ -101,13 +110,16 @@ public class Validator {
 	 * @param email String a comprobar
 	 * 
 	 * @return true, en caso que el formato sea v�lido
-	 * FECHA: Enero 2023
 	 * 
-	 * AUTOR: Miguel Garcia
+	 *	@version	27/01/2023
+	 *  @author 	Andrea Sánchez
 	 * 
 	 * **************************************************************************************/
 	public static boolean isEmailValido(String email){
-		return true;
+		if(email.matches(EMAIL_PATTERN)) {
+			return true;
+		}
+		return false;
 	}
 
 	/* ***************************************************************************************
@@ -120,14 +132,20 @@ public class Validator {
 	 * @param dni String con DNI a ser validado
 	 * 
 	 * @return true, si el DNI cumple el estandar nacional.
-	 * FECHA: Enero 2023
-	 * AUTOR: Miguel Garcia
+	 * 
+	 *	@version	27/01/2023
+	 *  @author 	Andrea Sánchez
 	 * 
 	 * **************************************************************************************/
+	
 	public static boolean cumpleDNI(String dni){
 		
-		return true;
-		
+		for (int i = 0; i < LETRA_DNI.length(); i++) {
+			if(LETRA_DNI.charAt(i) == dni.charAt(LONGITUD_DNI -1) && dni.matches(DNI_PATTERN) && (dni.length() == LONGITUD_DNI)) {
+				return true;
+			}
+		}	
+		return false;
 	}
 	
 
@@ -141,16 +159,19 @@ public class Validator {
 	 * @param valorMinimo (int) N�mero valor aceptable
 	 * @param valorMaximo (int) M�N�mero valor aceptable
 	 * 
-	 * @return true si valorMinimo > valor > valorMaximo
-	 * FECHA: Enero 2023
-	 * AUTOR: Miguel Garcia 
+	 * @return true si valorMinimo < valor < valorMaximo
+	 * 
+	 *	@version	27/01/2023
+	 *  @author 	Andrea Sánchez
 	 * 
 	 * **************************************************************************************/
 	public static boolean cumpleRango(
 			int valor, 
 			int valorMinimo,
 			int valorMaximo){
-		
+		if(!(valorMaximo > valor && valor > valorMinimo)) {
+			return false;
+		}
 		return true;
 		
 	}
@@ -158,6 +179,9 @@ public class Validator {
 			double valor, 
 			int valorMinimo,
 			int valorMaximo){
+		if(!(valorMaximo > valor && valor > valorMinimo)) {
+			return false;
+		}
 		return true;
 		
 	}
@@ -174,13 +198,18 @@ public class Validator {
 	 * @param longitudMinima int que indique longitud m�nima.
 	 * 
 	 * @return cierto, si la longitud del texto es mayor o igual que longitudMinima
-	 * FECHA: Enero 2023
-	 * AUTOR: Miguel Garcia
+	 * 
+	 *	@version	27/01/2023
+	 *  @author 	Andrea Sánchez
 	 * 
 	 * **************************************************************************************/
 	public static boolean cumpleLongitudMin(
 			String texto, 
 			int longitudMinima){
+		if(!(texto.length() >= longitudMinima)) {
+			return false;
+		}
+		
 		return true;
 		
 	}
@@ -197,13 +226,18 @@ public class Validator {
 	 * @param longitudMaxima int con la longitud m�xima del texto
 	 * 
 	 * @return true, si el texto es menor o igual que la longitud m�xima.
-	 * FECHA: Enero 2023 
-	 * AUTOR: Miguel Garcia 
+	 * 
+	 *	@version	27/01/2023
+	 *  @author 	Andrea Sánchez
 	 * 
 	 * **************************************************************************************/
 	public static boolean cumpleLongitudMax(
 			String texto, 
 			int longitudMaxima){
+		
+		if(!(texto.length() <= longitudMaxima)) {
+			return false;
+		}
 		return true;
 		
 	}
@@ -221,15 +255,19 @@ public class Validator {
 	 * 
 	 * @return true, si la longitud del texto cumple: longitudMinima
 	 *               <= longitudTexto <=longitudMaxima
-	 * FECHA: Enero 2023 
-	 * AUTOR: Miguel Garcia - Barcelona
+	 *               
+	 *	@version	27/01/2023
+	 *  @author 	Andrea Sánchez
 	 * 
 	 * **************************************************************************************/
 	public static boolean cumpleLongitud(
 			String texto, 
 			int longitudMinima, 
 			int longitudMaxima){
-
+		if(!cumpleLongitudMin(texto,longitudMinima) && cumpleLongitudMax(texto,longitudMaxima)) {
+			return false;
+		}
+		
 		return true;
 		
 
@@ -242,6 +280,9 @@ public class Validator {
 	 */
 	
 	public static boolean valDateMin(LocalDate fecha, LocalDate min){
+		if(!min.isBefore(fecha)) {
+			return false;
+		}
 		return true;
 		
 	}
@@ -253,6 +294,9 @@ public class Validator {
 	 * @return
 	 */
 	public static boolean valDateMax(LocalDate fecha, LocalDate max){
+		if(!max.isAfter(fecha)) {
+			return false;
+		}
 		return true;
 		
 	}	
@@ -263,8 +307,15 @@ public class Validator {
 	 * @param fecha
 	 * @return
 	 */
+	
 	public static boolean esFechaValida(String fecha){
-		return true;
+		DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		if(fecha.contains("/") && (fecha.length() == 10)) {
+			LocalDate.parse(fecha, formate);
+			return true;
+		}
+		return false;
 		
 		
 	}
@@ -275,7 +326,12 @@ public class Validator {
 	 * @param password string con la contrase�a introducida
 	 * @return true si cumple con las especificaciones
 	 */
+	//contraseña minimo 6 caracteres contener una minuscula una mayuscula un digito y un simbolo
+
 	public static boolean esPasswordValida(String password){
+		if(!password.matches(PASSWORD_PATTERN)) {
+			return false;
+		}
 		return true;
 
 	}
