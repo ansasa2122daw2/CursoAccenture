@@ -14,12 +14,29 @@ class FiltrosTest {
 	final String FECHA2= "12/12/2002";
 	final String FECHA3= "12-12-2002";
 	final String FECHA4= "12-12-22";
+	final String FECHA5= "ae-bf-tf";
 	
+	//Primera version test
+	@Disabled
 	@Test
 	void testFechaCorrecta() throws Exception{
 		assertEquals(Filtros.fechaCorrecta(FECHA2),null);
 	}
 	
+	@Test
+	void testFechaCorrectaErr() {
+		assertEquals(Filtros.fechaCorrecta1(FECHA),null);
+	}
+	
+	@Test
+	void testFechaCorrecta1() {
+		assertEquals(Filtros.fechaCorrecta1(FECHA3),LocalDate.of(2002, 12, 12));
+	}
+	
+	@Test
+	void testFechaCorrecta2() {
+		assertEquals(Filtros.fechaCorrecta1(FECHA3, "dd-MM-yyyy"), LocalDate.of(2002, 12, 12));
+	}
 
 	@Test
 	void testFiltroString() {

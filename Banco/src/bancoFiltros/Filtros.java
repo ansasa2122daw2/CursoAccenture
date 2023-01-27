@@ -30,7 +30,7 @@ public class Filtros {
 	 * @param formato opcional
 	 * @return LocalDate con la fecha, si es correcto o null
 	 */
-	
+	//Primera solución realizada 26/1
 	public static LocalDate fechaCorrecta(String fecha) throws Exception {
 
 		DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -51,6 +51,30 @@ public class Filtros {
 			return null;
 		}
 	}
+	
+	//Segunda solución realizada 27/1
+	/**
+	 * Clase fechaCorrecta que pasa fecha y llamamos al método donde puedes pasarle el formato
+	 * @param fecha
+	 * @return
+	 */
+	public static LocalDate fechaCorrecta1(String fecha1) {
+		return fechaCorrecta1(fecha1, "dd-MM-yyyy");
+	}
+	
+	public static LocalDate fechaCorrecta1(String fecha1, String format1) {
+		DateTimeFormatter formate1 = DateTimeFormatter.ofPattern(format1);
+		
+		try {
+			LocalDate dateTime1 = LocalDate.parse(fecha1, formate1);
+			return dateTime1;
+		}catch(DateTimeParseException e) {
+		}
+		return null;
+		
+	}
+	
+	
 	
 	public static boolean filtroString(String texto, int maxLong, int minLong) {
 		return (texto.length()<= maxLong) && (texto.length()>= minLong);
