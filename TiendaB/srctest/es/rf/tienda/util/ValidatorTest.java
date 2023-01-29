@@ -55,6 +55,7 @@ class ValidatorTest {
 	private String FECHAV = "12/12/2002";
 	private String FECHA_ERR = "12/12/22";
 	private String FECHAERR = "12122002";
+	private String FECHAERR2 = "12.12.2002";
 	
 	private String CONTRA = "macedoniA1@";
 	private String CONTRAOK = "-unodos@1ABC";
@@ -205,6 +206,7 @@ class ValidatorTest {
 	void testEsFechaValidaERR() {
 		assertFalse(Validator.esFechaValida(FECHAERR));
 		assertFalse(Validator.esFechaValida(FECHA_ERR));
+		assertFalse(Validator.esFechaValida(FECHAERR2));
 	}
 
 	@Test
