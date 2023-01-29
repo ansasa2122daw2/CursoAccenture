@@ -87,12 +87,7 @@ public class Filtros {
 		if(fecha.compareTo(fMin) == MINFECHA) {
 			return false;
 		}
-//		if(fecha.plusYears(MAXFECHA) != fMax.getYear()) {
-//			return true;
-//		}
-//		if (fecha.minusYears(MAXFECHA) != null) {
-//			return true;
-//		}
+
 	return true;
 	}
 	
