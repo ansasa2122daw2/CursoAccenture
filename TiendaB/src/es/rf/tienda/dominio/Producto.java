@@ -3,6 +3,8 @@ package es.rf.tienda.dominio;
 import java.time.LocalDate;
 import java.util.List;
 
+import es.rf.tienda.util.Validator;
+
 /**
  * Nombre: Producto
  * Descipcion: Clase Producto
@@ -31,14 +33,14 @@ public class Producto {
 	private char pro_stat;					//estado
 	
 	/**
-	 * Constructor
+	 * Constructor tiene que llamar a los setters
 	 */
 	public Producto() {
 		super();
 	}
 	
 	/**
-	 * Getters y setters
+	 * Getters y setters +  métodos Validators
 	 * @return
 	 */
 
@@ -47,7 +49,9 @@ public class Producto {
 	}
 
 	public void setId_producto(String id_producto) {
-		this.id_producto = id_producto;
+		if(Validator.filtroProducto(id_producto)) {
+			this.id_producto = id_producto;
+		}
 	}
 
 	public String getPro_descripcion() {
@@ -55,6 +59,9 @@ public class Producto {
 	}
 
 	public void setPro_descripcion(String pro_descripcion) {
+		if(Validator.cumpleLongitud(pro_descripcion, 5, 100)) { //final private (?
+			
+		}
 		this.pro_descripcion = pro_descripcion;
 	}
 
