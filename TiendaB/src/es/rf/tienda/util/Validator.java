@@ -49,6 +49,11 @@ public class Validator {
 	 * Longitud que debe tener todo DNI pasado a la aplicación.
 	 */
 	private final static int LONGITUD_DNI = 12;
+	
+	/**
+	 * Solo mayúsculas y números (2 mayusculas y tres números)
+	 */
+	private final static String PRODUCTO_PATTERN = "^(?=(?:\\D*\\d){3}\\D*$)(?:[^A-Z]*[A-Z]){2}[^A-Z]*$";
 
 	/** ***************************************************************************************
 	 * NOMBRE: isAlfanumeric                                                                 *
@@ -139,15 +144,15 @@ public class Validator {
 	 * **************************************************************************************/
 	//REVISAR
 	public static boolean cumpleDNI(String dni){
+		Character letraDNI = Character.toUpperCase(dni.charAt(dni.length() -1));
 		
-		for (int i = 0; i < LETRA_DNI.length(); i++) {
-			if(LETRA_DNI.charAt(i) == dni.charAt(LONGITUD_DNI -1) && dni.matches(DNI_PATTERN) && (dni.length() == LONGITUD_DNI)) {
+		if(LETRA_DNI.charAt(LONGITUD_DNI %23) == letraDNI) {
+			if(dni.matches(DNI_PATTERN) && (dni.length() == LONGITUD_DNI)) {
 				return true;
 			}
-		}	
+		}
 		return false;
 	}
-	
 
 	/** ***************************************************************************************
 	 * NOMBRE: cumpleRango                                                                 *
@@ -182,15 +187,13 @@ public class Validator {
 		if(!(valorMaximo > valor && valor > valorMinimo)) {
 			return false;
 		}
-		return true;
-		
+		return true;	
 	}
-
 
 	/** ***************************************************************************************
 	 * NOMBRE: cumpleLongitudMin                                                                 
 	 * 
-	 * DESCRIPCI�N: 
+	 * DESCRIPCIÓN: 
 	 * 		Comprobar que el texto pasado tiene una longitud de al menos x caracteres, siendo
 	 * 		x el entero pasado como parámetro
 	 * 
@@ -209,16 +212,13 @@ public class Validator {
 		if(!(texto.length() >= longitudMinima)) {
 			return false;
 		}
-		
-		return true;
-		
+		return true;	
 	}
-
-
-	/* ***************************************************************************************
+	
+	/** ***************************************************************************************
 	 * NOMBRE: cumpleLongitudMax                                                                 *
 	 * 
-	 * DESCRIPCI�N: *//**
+	 * DESCRIPCIÓN: 
 	 * 		Comprobar que el texto pasado tiene una longitud de, como mucho, x caracteres, siendo
 	 * 		x el entero pasado como parámetro
 	 * 
@@ -239,9 +239,7 @@ public class Validator {
 			return false;
 		}
 		return true;
-		
 	}
-
 
 	/****************************************************************************************
 	 * NOMBRE: cumpleLongitud                                                                 *
@@ -267,10 +265,7 @@ public class Validator {
 		if(!cumpleLongitudMin(texto,longitudMinima) && cumpleLongitudMax(texto,longitudMaxima)) {
 			return false;
 		}
-		
 		return true;
-		
-
 	}
 	/**
 	 * Valida una fecha calendar con m�nimo min
@@ -284,7 +279,6 @@ public class Validator {
 			return false;
 		}
 		return true;
-		
 	}
 	
 	/**
@@ -298,7 +292,6 @@ public class Validator {
 			return false;
 		}
 		return true;
-		
 	}	
 	
 	/**
@@ -314,10 +307,7 @@ public class Validator {
 		 if(fecha.matches(strPattern)) {
 			 return true;
 		 }
-
 		return false;
-		
-		
 	}
 	
 	/**
@@ -333,6 +323,17 @@ public class Validator {
 			return false;
 		}
 		return true;
-
 	}
+	
+	/**
+	 * Commit filtro Producto
+	 * Solo 5 caracteres letras(en mayusculas) y numeros 
+	 */
+	public static boolean filtroProducto(String filtro) {
+		if(!(filtro.matches(PRODUCTO_PATTERN))) {
+			return false;
+		}
+		return true;
+	}
+	
 }

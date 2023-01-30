@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class ValidatorTest {
 	
-	private String ALFANUMERIC = "Eprueba";
+	private String ALFANUMERIC = "23Eprueba";
 	private String ALFANUMERICERR = "1E{prueba";
 	
 	private String VACIO = "";
@@ -62,6 +62,12 @@ class ValidatorTest {
 	private String CONTRAOK = "-unodos@1ABC";
 	private String CONTRAERR = "1212121212";
 	private String CONTRA_ERR = "m2@A";
+	
+	private String PRODUCT = "IN325";
+	private String PRODUCTERR = "989325";
+	private String PRODUCTERR2 = "in9325";
+	private String PRODUCTERR3 = "ineuoi";
+	private String PRODUCTERR4 = "ION24";
 
 	@Test
 	void testIsAlfanumeric() {
@@ -221,6 +227,15 @@ class ValidatorTest {
 	void testEsPasswordValidaERR() {
 		assertFalse(Validator.esPasswordValida(CONTRAERR));
 		assertFalse(Validator.esPasswordValida(CONTRA_ERR));
+	}
+	
+	@Test
+	void testFiltroProducto() {
+		assertTrue(Validator.filtroProducto(PRODUCT));
+		assertFalse(Validator.filtroProducto(PRODUCTERR));
+		assertFalse(Validator.filtroProducto(PRODUCTERR2));
+		assertFalse(Validator.filtroProducto(PRODUCTERR3));
+		assertFalse(Validator.filtroProducto(PRODUCTERR4));
 	}
 
 }
