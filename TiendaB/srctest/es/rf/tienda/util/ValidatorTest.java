@@ -68,6 +68,7 @@ class ValidatorTest {
 	private String PRODUCTERR2 = "in9325";
 	private String PRODUCTERR3 = "ineuoi";
 	private String PRODUCTERR4 = "ION24";
+	private String PRODUCTERR5 = "345OI";
 
 	@Test
 	void testIsAlfanumeric() {
@@ -236,6 +237,7 @@ class ValidatorTest {
 		assertFalse(Validator.filtroProducto(PRODUCTERR2));
 		assertFalse(Validator.filtroProducto(PRODUCTERR3));
 		assertFalse(Validator.filtroProducto(PRODUCTERR4));
+		assertFalse(Validator.filtroProducto(PRODUCTERR5));
 	}
 
 }

@@ -53,7 +53,7 @@ public class Validator {
 	/**
 	 * Solo mayúsculas y números (2 mayusculas y tres números)
 	 */
-	private final static String PRODUCTO_PATTERN = "^(?=(?:\\D*\\d){3}\\D*$)(?:[^A-Z]*[A-Z]){2}[^A-Z]*$";
+	private final static String PRODUCTO_PATTERN = "^[A-Z]{2}[0-9]{3}$";
 
 	/** ***************************************************************************************
 	 * NOMBRE: isAlfanumeric                                                                 *
