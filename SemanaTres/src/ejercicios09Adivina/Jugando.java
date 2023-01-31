@@ -15,7 +15,12 @@ public class Jugando {
 	static int topeInf = 0;
 	static boolean finPartida = false;
 	static boolean ganador = false;
-	static boolean volverJugar = false;
+	
+	static Random rand = new Random();
+	static int randUSU = rand.nextInt(1000)+1;
+	static int randMAQ = rand.nextInt(1000)+1;
+	
+	static Scanner teclado = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		
@@ -30,23 +35,19 @@ public class Jugando {
 	}
 	
 	/**
-	 * Métodos
+	 * Métodos que serán llamados en el main
 	 */	
 	static void yoGuess() {
-		Random rand = new Random();
-		int randUSU = rand.nextInt(1000)+1;
-
-		Scanner teclado = new Scanner(System.in);
-		int adivinar = 0;
+		int adivinar;
 		
 		System.out.print("Introduce un número: ");
 		adivinar = teclado.nextInt();
 		teclado.nextLine();
 		
 		if (randUSU > adivinar) {
-			System.out.println("mayor que el introducido");
+			System.out.println("Número mayor que el introducido");
 		} else if (randUSU < adivinar) {
-			System.out.println("menor que el introducido");
+			System.out.println("Número menor que el introducido");
 		}
 		if(adivinar == randUSU) {
 			System.out.println("Acertaste!");
@@ -57,22 +58,21 @@ public class Jugando {
 	}
 	
 	static void maquinaGuess() {
-		Random rand = new Random();
-		int randMAQ = rand.nextInt(1000)+1;
-		Scanner teclado = new Scanner(System.in);
-		String maquina = "";
+		String maquina;
 
-		randMAQ = (int)((topeSup + topeInf) /2);
-		System.out.println("Máquina adivinar: " + randMAQ + "(M)ayor," + " me(N)or," + " (F)in");
+		System.out.println("\nMáquina adivinar: " + randMAQ + "\n(M)ayor," + " me(N)or," + " (F)in");
 		maquina = teclado.next();
+		
 		if(maquina.equals("M")) {
-			topeInf = randMAQ;
+			topeInf = randMAQ +1;
+			randMAQ = ((topeSup + topeInf) /2);
 		}
 		if(maquina.equals("N")) {
-			topeSup = randMAQ;
+			topeSup = randMAQ -1;
+			randMAQ = ((topeSup + topeInf) /2);
 		}
 		if(maquina.equals("F")) {
-			System.out.println("Maquina acerto!");
+			System.out.println("Máquina acerto!");
 			ganador=true;
 			finPartida = true;
 		}
