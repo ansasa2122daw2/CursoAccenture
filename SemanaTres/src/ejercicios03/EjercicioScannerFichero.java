@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Ejercicio Corregido el List y el for no hacian falta
+ * @author andrea.sanclemente
+ *
+ */
+
 public class EjercicioScannerFichero {
 	public static void main(String[] args) {
 		String nombre;
@@ -19,8 +25,8 @@ public class EjercicioScannerFichero {
 		System.out.print("Introduce tu apellido: ");
 		apellido = teclado.next();
 
-		List listar = new ArrayList();
-		listar.add(nombre + apellido);
+//		List listar = new ArrayList();
+//		listar.add(nombre + apellido);
 		
 		FileWriter fichero = null;
 		PrintWriter pw = null;
@@ -29,8 +35,11 @@ public class EjercicioScannerFichero {
 			fichero = new FileWriter("C:\\aCursoAccenture\\cursowk\\SemanaTres\\src\\ejercicios03\\fichero.txt");
 			pw = new PrintWriter(fichero);
 			
-			for (int i=0; i < listar.size(); i++) 
-				pw.println(i +  " Nombre y apellido " + nombre + " " + apellido);
+			//for (int i=0; i < listar.size(); i++) 
+				//pw.println(i +  " Nombre y apellido " + nombre + " " + apellido);
+			
+			//era Nombre= y Apellido=
+			pw.println("Nombre=" + nombre + " Apellido=" + apellido);
 			}catch(Exception e ){
 			e.printStackTrace();
 			
