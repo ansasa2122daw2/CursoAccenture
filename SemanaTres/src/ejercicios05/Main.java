@@ -2,7 +2,7 @@ package ejercicios05;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		Mensaje m1 = new Mensaje();
 		Mensaje m2 = new Mensaje();
 		
@@ -11,6 +11,7 @@ public class Main {
 		
 		m1.start();
 		m2.start();
+		Thread.sleep(5000);
 		m2.setMensaje("***************");
 		
 
