@@ -3,6 +3,12 @@ package ejercicios09Adivina;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Clase que estaba haciendo EN PROCESO
+ * @author andrea.sanclemente
+ *
+ */
+
 public class Adivina1 {
 	int adivinar = 0;
 	Random n = new Random();
