@@ -14,34 +14,29 @@ public class Jugando {
 	static int topeSup = 1000;
 	static int topeInf = 0;
 	static boolean finPartida = false;
+	static boolean ganador = false;
+	static boolean volverJugar = false;
 	
 	public static void main(String[] args) {
-	
-		boolean ganadorM = false;
-		boolean ganadorY = false;
-
+		
 		while(!(finPartida)) {
-			if(!(ganadorM)) {
+			if(!(ganador)) {
 				yoGuess();
 			}
-			if(!(ganadorY)) {
+			if(!(ganador)) {
 				maquinaGuess();
 			}
 		}
-
 	}
 	
 	/**
 	 * Métodos
-	 */
-	
+	 */	
 	static void yoGuess() {
 		Random rand = new Random();
 		int randUSU = rand.nextInt(1000)+1;
-		boolean ganadorY = false;
 
 		Scanner teclado = new Scanner(System.in);
-		
 		int adivinar = 0;
 		
 		System.out.print("Introduce un número: ");
@@ -55,21 +50,20 @@ public class Jugando {
 		}
 		if(adivinar == randUSU) {
 			System.out.println("Acertaste!");
-			ganadorY=true;
-			finPartida = false;
+			ganador=true;
+			finPartida = true;
 		}
 		
 	}
 	
 	static void maquinaGuess() {
-		boolean ganadorM = false;
 		Random rand = new Random();
 		int randMAQ = rand.nextInt(1000)+1;
 		Scanner teclado = new Scanner(System.in);
 		String maquina = "";
-		
+
 		randMAQ = (int)((topeSup + topeInf) /2);
-		System.out.println("Numero maquina adivinar: " + randMAQ + "(M)ayor," + " me(N)or," + " (F)in");
+		System.out.println("Máquina adivinar: " + randMAQ + "(M)ayor," + " me(N)or," + " (F)in");
 		maquina = teclado.next();
 		if(maquina.equals("M")) {
 			topeInf = randMAQ;
@@ -78,12 +72,9 @@ public class Jugando {
 			topeSup = randMAQ;
 		}
 		if(maquina.equals("F")) {
-			System.out.println("Maquina adivino");
-			ganadorM=true;
+			System.out.println("Maquina acerto!");
+			ganador=true;
 			finPartida = true;
 		}
 	}
-
 }
-
-
