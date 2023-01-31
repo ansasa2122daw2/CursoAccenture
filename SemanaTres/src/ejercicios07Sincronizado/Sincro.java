@@ -2,7 +2,7 @@ package ejercicios07Sincronizado;
 
 public class Sincro implements Runnable{
 
-	static Integer n = 1;
+	static Integer n = 1; //synchronized no puede ser int tienen que ser clases
 	private String mensaje;
 	
 	public void setMensaje(String mensaje) {
