@@ -20,8 +20,6 @@ public class Jugando {
 		boolean ganadorM = false;
 		boolean ganadorY = false;
 
-		
-		
 		while(!(finPartida)) {
 			if(!(ganadorM)) {
 				yoGuess();
@@ -70,6 +68,7 @@ public class Jugando {
 		Scanner teclado = new Scanner(System.in);
 		String maquina = "";
 		
+		randMAQ = (int)((topeSup + topeInf) /2);
 		System.out.println("Numero maquina adivinar: " + randMAQ + "(M)ayor," + " me(N)or," + " (F)in");
 		maquina = teclado.next();
 		if(maquina.equals("M")) {
@@ -78,8 +77,6 @@ public class Jugando {
 		if(maquina.equals("N")) {
 			topeSup = randMAQ;
 		}
-		randMAQ = (int)((topeSup + topeInf) /2);
-		
 		if(maquina.equals("F")) {
 			System.out.println("Maquina adivino");
 			ganadorM=true;
