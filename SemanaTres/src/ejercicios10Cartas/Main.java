@@ -11,33 +11,39 @@ public class Main {
 	static final int CARTASNUM = 5;
 	
 	static Paquete pq = new Paquete();
-	static Carta cartas = new Carta();
+	static Carta cartas;
 	static List<Jugador> jugadores = new ArrayList<>();
 	static Set<Carta> cartasBaraja = new HashSet<>();
 	
-	static String tipoBaraja = Paquete.ESPANOLA;
-	
 	public static void main(String[] args) {
+		cartas = new Carta();
 
-		pq.baraja(tipoBaraja);
+		pq.baraja();
 		cartasBaraja = pq.cartas;
-		cartasBaraja.forEach(System.out::println);
-		
+		pq.getBaraja();
 		
 		recibesJugadores();
 		
 		visualiza();
-		
-		reparte();
+		reparte(cartasBaraja, jugadores);
 		
 		visualizaJugador("Andrea");
 		
 		
 	}
 	
-	static void reparte() {
-		Iterator<Carta> it = cartasBaraja.iterator();
+	static void reparte(Set<Carta> baraja, List<Jugador> jugadores) {
+		Iterator<Carta> it = baraja.iterator();
 		for(int i = 0; i < CARTASNUM; i++) {
+			for(Iterator<Jugador> jugad = jugadores.iterator();jugad.hasNext();) {
+				Jugador actual = jugad.next();
+				//actual.setMano(it.next());
+				it.remove();
+				
+				int numCarta = baraja.size()+1;
+
+				Carta cartaNueva = baraja.stream().map().get()
+			}
 //			for(Iterator<Jugador> jugad = jugadores.iterator();jugad.hasNext();) {
 //				Jugador actu = jugad.next();
 //				actu.setCarta(it.next());
@@ -51,7 +57,6 @@ public class Main {
 			jugadores.add(new Jugador("Andrea", 20));
 			jugadores.add(new Jugador("David", 21));
 			jugadores.add(new Jugador("Maria", 26));
-			jugadores.forEach(System.out::println);
 		}
 	}
 	
@@ -63,7 +68,7 @@ public class Main {
 	static void visualizaJugador(String nombre) {
 	    for(int i=0; i<jugadores.size(); i++){
 	        Jugador jugador = jugadores.get(i);
-	        if(jugador.getNombre() == nombre) {
+	        if(jugador.getNombre().equals(nombre)) {
 		    	System.out.println(jugadores.get(i).toString());
 		    }
 	    }

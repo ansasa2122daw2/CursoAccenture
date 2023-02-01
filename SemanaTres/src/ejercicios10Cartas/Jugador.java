@@ -57,11 +57,13 @@ public class Jugador {
 
 	/**
 	 * Creas este método
-	 * @param mano
+	 * @param carta
 	 */
 
-	public void setCarta(Set<Carta> mano) {
+	public void setMano(Set<Carta> mano) {
+		mano = new HashSet<>();
 		this.mano = mano;
 	}
+
 
 }
