@@ -8,7 +8,7 @@ import java.util.Set;
 public class Jugador {
 	private String nombre;
 	private int edad;
-	private Set<Carta> mano;
+	private Set<Carta> mano = new HashSet<>();;
 	
 	public Jugador(String nombre, int edad, Set<Carta> mano) {
 		super();
@@ -52,7 +52,7 @@ public class Jugador {
 	
 	@Override
 	public String toString() {
-		return "Jugador [nombre=" + nombre + ", edad=" + edad + ", mano=" + mano + "]";
+		return "\nJugador: nombre=" + nombre + ", edad=" + edad + "\nmano=" + mano ;
 	}
 
 	/**
@@ -60,9 +60,9 @@ public class Jugador {
 	 * @param carta
 	 */
 
-	public void setMano(Set<Carta> mano) {
-		mano = new HashSet<>();
-		this.mano = mano;
+	public void setMano(Carta carta) {
+		this.mano.add(carta);
+		
 	}
 
 
