@@ -3,6 +3,7 @@ package es.rf.tienda.dominio;
 import java.time.LocalDate;
 import java.util.List;
 
+import es.rf.tienda.exception.DomainException;
 import es.rf.tienda.util.Validator;
 
 /**
@@ -20,7 +21,7 @@ public class Producto {
 	private int pro_stock;					//stock
 	private LocalDate pro_fecRepos;			//fecha prevista reposicion
 	private LocalDate pro_fecActi;			//fecha activacion
-	private LocalDate fec_Desacti;			//fecha desactivacion
+	private LocalDate pro_fecDesacti;		//fecha desactivacion
 	private String pro_uniVenta;			//unidad de venta
 	private double pro_cantXUniVenta;		//cantidad de unidades ultimas
 	private String pro_uniUltNivel;			//unidad ultima
@@ -48,9 +49,11 @@ public class Producto {
 		return id_producto;
 	}
 
-	public void setId_producto(String id_producto) {
-		if(Validator.filtroProducto(id_producto)) {
+	public void setId_producto(String id_producto) throws DomainException {
+		if(Validator.filtroProducto(id_producto) && Validator.cumpleLongitud(id_producto, 5, 5)) {
 			this.id_producto = id_producto;
+		}else {
+            throw new DomainException();
 		}
 	}
 
@@ -58,27 +61,36 @@ public class Producto {
 		return pro_descripcion;
 	}
 
-	public void setPro_descripcion(String pro_descripcion) {
-		if(Validator.cumpleLongitud(pro_descripcion, 5, 100)) { //final private (?
-			
+	public void setPro_descripcion(String pro_descripcion) throws DomainException {
+		if(Validator.cumpleLongitud(pro_descripcion, 5, 100)) { 
+			this.pro_descripcion = pro_descripcion;
+		}else {
+            throw new DomainException();
 		}
-		this.pro_descripcion = pro_descripcion;
 	}
 
 	public String getPro_desLarga() {
 		return pro_desLarga;
 	}
 
-	public void setPro_desLarga(String pro_desLarga) {
-		this.pro_desLarga = pro_desLarga;
+	public void setPro_desLarga(String pro_desLarga) throws DomainException {
+		if(Validator.cumpleLongitud(pro_desLarga, 5, 2000)) {
+			this.pro_desLarga = pro_desLarga;
+		}else {
+            throw new DomainException();
+		}
 	}
 
 	public double getPro_precio() {
 		return pro_precio;
 	}
 
-	public void setPro_precio(double pro_precio) {
-		this.pro_precio = pro_precio;
+	public void setPro_precio(double pro_precio) throws DomainException {
+		if(Validator.cumpleRango(pro_precio, 0, 100)) {
+			this.pro_precio = pro_precio;
+		}else {
+            throw new DomainException();
+		}
 	}
 
 	public int getPro_stock() {
@@ -93,32 +105,52 @@ public class Producto {
 		return pro_fecRepos;
 	}
 
-	public void setPro_fecRepos(LocalDate pro_fecRepos) {
-		this.pro_fecRepos = pro_fecRepos;
+	public void setPro_fecRepos(LocalDate pro_fecRepos) throws DomainException {
+		if(Validator.valDateMax(pro_fecRepos, LocalDate.now())){
+			this.pro_fecRepos = pro_fecRepos;
+		}else {
+            throw new DomainException();
+		}
 	}
 
 	public LocalDate getPro_fecActi() {
 		return pro_fecActi;
 	}
 
-	public void setPro_fecActi(LocalDate pro_fecActi) {
-		this.pro_fecActi = pro_fecActi;
+	public void setPro_fecActi(LocalDate pro_fecActi) throws DomainException {
+		if(Validator.valDateMax(pro_fecRepos, LocalDate.now())){
+			this.pro_fecActi = pro_fecActi;
+		}else {
+            throw new DomainException();
+		}
 	}
 
-	public LocalDate getFec_Desacti() {
-		return fec_Desacti;
+	public LocalDate getPro_FecDesacti() {
+		return pro_fecDesacti;
 	}
 
-	public void setFec_Desacti(LocalDate fec_Desacti) {
-		this.fec_Desacti = fec_Desacti;
+	public void setPro_FecDesacti(LocalDate pro_fecDesacti) throws DomainException { //revisar
+		if(getPro_fecActi() != null) {
+			Validator.valDateMax(pro_fecDesacti, pro_fecActi);
+			this.pro_fecDesacti = pro_fecDesacti;
+		}else if(Validator.valDateMax(pro_fecDesacti, LocalDate.now())) {
+			this.pro_fecDesacti = pro_fecDesacti;
+		}else {
+            throw new DomainException();
+		}
+		
 	}
 
 	public String getPro_uniVenta() {
 		return pro_uniVenta;
 	}
 
-	public void setPro_uniVenta(String pro_uniVenta) {
-		this.pro_uniVenta = pro_uniVenta;
+	public void setPro_uniVenta(String pro_uniVenta) throws DomainException {
+		if(Validator.isAlfanumeric(pro_uniVenta) && Validator.cumpleLongitud(pro_uniVenta, 1, 10)) {
+			this.pro_uniVenta = pro_uniVenta;
+		}else {
+            throw new DomainException();
+		}
 	}
 
 	public double getPro_cantXUniVenta() {
@@ -137,11 +169,11 @@ public class Producto {
 		this.pro_uniUltNivel = pro_uniUltNivel;
 	}
 
-	public int getId_pais() {
+	public int getId_pais() { 
 		return id_pais;
 	}
 
-	public void setId_pais(int id_pais) {
+	public void setId_pais(int id_pais) { // Existencia en lista paises (Base de datos)
 		this.id_pais = id_pais;
 	}
 
@@ -157,7 +189,7 @@ public class Producto {
 		return id_categoria;
 	}
 
-	public void setId_categoria(int id_categoria) {
+	public void setId_categoria(int id_categoria) { // Existencia en lista paises (Base de datos)
 		this.id_categoria = id_categoria;
 	}
 
@@ -189,7 +221,7 @@ public class Producto {
 		return pro_stat;
 	}
 
-	public void setPro_stat(char pro_stat) {
+	public void setPro_stat(char pro_stat) { // Rando Base de datos A o B
 		this.pro_stat = pro_stat;
 	}
 
@@ -197,7 +229,7 @@ public class Producto {
 	public String toString() {
 		return "Producto [id_producto=" + id_producto + ", pro_descripcion=" + pro_descripcion + ", pro_desLarga="
 				+ pro_desLarga + ", pro_precio=" + pro_precio + ", pro_stock=" + pro_stock + ", pro_fecRepos="
-				+ pro_fecRepos + ", pro_fecActi=" + pro_fecActi + ", fec_Desacti=" + fec_Desacti + ", pro_uniVenta="
+				+ pro_fecRepos + ", pro_fecActi=" + pro_fecActi + ", pro_fecDesacti=" + pro_fecDesacti + ", pro_uniVenta="
 				+ pro_uniVenta + ", pro_cantXUniVenta=" + pro_cantXUniVenta + ", pro_uniUltNivel=" + pro_uniUltNivel
 				+ ", id_pais=" + id_pais + ", pro_usoRecomendado=" + pro_usoRecomendado + ", id_categoria="
 				+ id_categoria + ", pro_stkReservado=" + pro_stkReservado + ", pro_nStkAlto=" + pro_nStkAlto
