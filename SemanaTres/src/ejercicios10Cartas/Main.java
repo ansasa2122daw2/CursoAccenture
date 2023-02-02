@@ -33,10 +33,10 @@ public class Main {
 		visualiza(jugadores);
 		reparte(cartasBaraja, jugadores);
 		
+		visualiza(jugadores);
 		visualizaJugador(jugadores, "Maria");
 		
 		//valorarMano1(jugadores, "Maria");
-		
 		
 	}
 	
@@ -60,6 +60,7 @@ public class Main {
 			jugadores.add(new Jugador("Andrea", 20));
 			jugadores.add(new Jugador("David", 21));
 			jugadores.add(new Jugador("Maria", 26));
+			jugadores.add(new Jugador("Alba", 30));
 		}
 	}
 	
@@ -90,6 +91,10 @@ public class Main {
 //	        	}
 		    }
 	    }
+	}
+	
+	static boolean highCard() {
+		return false;
 	}
 	
 	static boolean isPair(List<Jugador> jugadores) {
