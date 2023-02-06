@@ -98,17 +98,13 @@ public class CountryDAO implements CountryDAOI {
 	@Override
 	public int actualizar(Country country) throws Exception {
 		try {
-			/**
-			 * PREPARED STATEMENT CON ? 
-			 */
 			PreparedStatement ps = conn.prepareStatement(SQL_UPDATE_COUNTRY_POR_ID);
 			ps.setString(1, country.getCountry_id());
 			ps.setString(2, country.getCountry_name());
 			ps.setString(3, country.getRegion_id());
 			ps.setString(4, country.getCountry_id());
-			ps.executeQuery();
 			System.out.println("Country modificada");
-			return 0;
+			return ps.executeUpdate();
 
 		} catch (SQLException e) {
 			throw new Exception(SQL_UPDATE_COUNTRY_POR_ID + " " + e.getMessage());
@@ -117,15 +113,9 @@ public class CountryDAO implements CountryDAOI {
 
 	@Override
 	public int delete(Country country) throws Exception {
-
 		try {
-			/**
-			 * PREPARED STATEMENT CON ? 
-			 */
 			PreparedStatement ps = conn.prepareStatement(SQL_DELETEALL_COUNTRY);
-			ps.executeQuery();
-			System.out.println("Country eliminada");
-			return 0;
+			return ps.executeUpdate();
 
 		} catch (SQLException e) {
 			throw new Exception(SQL_DELETEALL_COUNTRY + " " + e.getMessage());
@@ -135,14 +125,9 @@ public class CountryDAO implements CountryDAOI {
 	@Override
 	public int delete(String country_id) throws Exception {
 		try {
-			/**
-			 * PREPARED STATEMENT CON ? 
-			 */
 			PreparedStatement ps = conn.prepareStatement(SQL_DELETE_COUNTRY_POR_ID);
 			ps.setString(1, country_id);
-			ps.executeQuery();
-			System.out.println("Country eliminada" + country_id);
-			return 0;
+			return ps.executeUpdate();
 
 		} catch (SQLException e) {
 			throw new Exception(SQL_DELETE_COUNTRY_POR_ID + " " + e.getMessage());
@@ -151,7 +136,7 @@ public class CountryDAO implements CountryDAOI {
 
 	@Override
 	public Country insert(Country country) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
