@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class ValidatorTest {
 	
-	private String ALFANUMERIC = "23Eprueba";
+	private String ALFANUMERIC = "23Epr ueba";
 	private String ALFANUMERICERR = "1E{prueba";
 	
 	private String VACIO = "";

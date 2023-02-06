@@ -54,7 +54,7 @@ public class Usuario {
 		if(Validator.isEmailValido(user_email)) {
 			this.user_email = user_email;
 		}else {
-            throw new DomainException();
+            throw new DomainException("El email no es válido");
 		}
 	}
 
@@ -66,7 +66,7 @@ public class Usuario {
 		if(Validator.esPasswordValida(user_pass)) {
 			this.user_pass = user_pass;
 		}else {
-            throw new DomainException();
+            throw new DomainException("La contraseña no es valida");
 		}
 	}
 
@@ -86,7 +86,7 @@ public class Usuario {
 		if(Validator.cumpleDNI(user_dni)) {
 			this.user_dni = user_dni;
 		}else {
-            throw new DomainException();
+            throw new DomainException("El dni no es correcto");
 		}
 	}
 
@@ -98,7 +98,7 @@ public class Usuario {
 		if(Validator.valDateMax(user_fecAlta, LocalDate.now())) {
 			this.user_fecAlta = user_fecAlta;
 		}else {
-            throw new DomainException();
+            throw new DomainException("la fecha no es correcta");
 		}
 	}
 
@@ -110,7 +110,7 @@ public class Usuario {
 		if(Validator.valDateMax(user_fecConfirmacion, LocalDate.now())) {
 			this.user_fecConfirmacion = user_fecConfirmacion;
 		}else {
-            throw new DomainException();
+            throw new DomainException("La fecha no es correcta");
 		}
 	}
 

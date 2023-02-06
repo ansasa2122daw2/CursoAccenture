@@ -19,6 +19,10 @@ public class Categoria {
 	private String cat_descripcion;		//descripcion de la categoria
 	
 	
+	final static int CUMPLE_5 = 5;
+	final static int CUMPLE_50 = 50;
+	final static int CUMPLE_200 = 200;
+	
 	public Categoria(){}
 	
 	
@@ -57,10 +61,10 @@ public class Categoria {
 	 * 
 	 */
 	public void setCat_nombre(String cat_nombre) throws DomainException {
-		if(Validator.isAlfanumeric(cat_nombre) && Validator.cumpleLongitud(cat_nombre, 5, 50)) {
+		if(Validator.isAlfanumeric(cat_nombre) && Validator.cumpleLongitud(cat_nombre, CUMPLE_5, CUMPLE_50)) {
 			this.cat_nombre = cat_nombre;
 		}else {
-            throw new DomainException();
+            throw new DomainException("Error no es alfanumerico o no cumple la longitud mínima de 5 y máxima de 50");
 		}
 		
 	}
@@ -79,10 +83,10 @@ public class Categoria {
 	 * 
 	 */
 	public void setCat_descripcion(String cat_descripcion) throws DomainException {
-		if(Validator.cumpleLongitudMax(cat_descripcion, 200)) {
+		if(Validator.cumpleLongitudMax(cat_descripcion, CUMPLE_200)) {
 			this.cat_descripcion = cat_descripcion;
 		}else {
-            throw new DomainException();
+            throw new DomainException("No cumple la longitud máxima de 200");
 		}
 	}
 

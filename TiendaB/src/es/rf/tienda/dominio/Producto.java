@@ -33,6 +33,14 @@ public class Producto {
 	private int pro_nStkBajo;				//stock para nivel bajo
 	private char pro_stat;					//estado
 	
+	final static int CUMPLEMIN_0 = 0;
+	final static int CUMPLEMIN_1 = 1;
+	final static int CUMPLEMIN_5 = 5;
+	final static int CUMPLEMIN_10 = 10;
+	final static int CUMPLEMAX_100 = 100;
+	final static int CUMPLEMAX_2000 = 2000;
+	
+	
 	/**
 	 * Constructor tiene que llamar a los setters
 	 */
@@ -50,7 +58,7 @@ public class Producto {
 	}
 
 	public void setId_producto(String id_producto) throws DomainException {
-		if(Validator.filtroProducto(id_producto) && Validator.cumpleLongitud(id_producto, 5, 5)) {
+		if(Validator.filtroProducto(id_producto) && Validator.cumpleLongitud(id_producto, CUMPLEMIN_5, CUMPLEMIN_5)) {
 			this.id_producto = id_producto;
 		}else {
             throw new DomainException();
@@ -62,7 +70,7 @@ public class Producto {
 	}
 
 	public void setPro_descripcion(String pro_descripcion) throws DomainException {
-		if(Validator.cumpleLongitud(pro_descripcion, 5, 100)) { 
+		if(Validator.cumpleLongitud(pro_descripcion, CUMPLEMIN_5, CUMPLEMAX_100)) { 
 			this.pro_descripcion = pro_descripcion;
 		}else {
             throw new DomainException();
@@ -74,7 +82,7 @@ public class Producto {
 	}
 
 	public void setPro_desLarga(String pro_desLarga) throws DomainException {
-		if(Validator.cumpleLongitud(pro_desLarga, 5, 2000)) {
+		if(Validator.cumpleLongitud(pro_desLarga, CUMPLEMIN_5, CUMPLEMAX_2000)) {
 			this.pro_desLarga = pro_desLarga;
 		}else {
             throw new DomainException();
@@ -86,7 +94,7 @@ public class Producto {
 	}
 
 	public void setPro_precio(double pro_precio) throws DomainException {
-		if(Validator.cumpleRango(pro_precio, 0, 100)) {
+		if(Validator.cumpleRango(pro_precio, CUMPLEMIN_0, CUMPLEMAX_100)) {
 			this.pro_precio = pro_precio;
 		}else {
             throw new DomainException();
@@ -146,7 +154,7 @@ public class Producto {
 	}
 
 	public void setPro_uniVenta(String pro_uniVenta) throws DomainException {
-		if(Validator.isAlfanumeric(pro_uniVenta) && Validator.cumpleLongitud(pro_uniVenta, 1, 10)) {
+		if(Validator.isAlfanumeric(pro_uniVenta) && Validator.cumpleLongitud(pro_uniVenta, CUMPLEMIN_1, CUMPLEMIN_10)) {
 			this.pro_uniVenta = pro_uniVenta;
 		}else {
             throw new DomainException();
