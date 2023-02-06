@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rf.curso.maven.ProyectoPrueba.dominio.Country;
+import rf.curso.maven.ProyectoPrueba.util.MontadorSQL;
 import rf.curso.maven.ProyectoPrueba.util.OracleJDBC;
 
 /**
@@ -24,17 +25,20 @@ import rf.curso.maven.ProyectoPrueba.util.OracleJDBC;
 
 public class CountryDAO implements CountryDAOI {
 	private static Connection conn;
-	
+
 	private static final Country country = new Country();
-	
+
 	public final static String SQL_LEER_COUNTRY = "Select * from countries";
 	public final static String SQL_LEER_COUNTRY_POR_ID = "Select * from countries_ass where country_id = ";
-	//usando preparedStatement
+	// usando preparedStatement
 	public final static String SQL_LEER_COUNTRY_POR_ID2 = "Select * from countries_ass where country_id = ?";
 	public final static String SQL_DELETE_COUNTRY_POR_ID = "delete from countries_ass where country_id = ?";
 	public final static String SQL_DELETEALL_COUNTRY = "delete * from countries_ass";
 	public final static String SQL_UPDATE_COUNTRY_POR_ID = "update countries_ass set country_id = ?, country_name = ?, region_id = ? where country_id = ?";
-	
+
+	// otra manera de hacerlo sin preparedStatement
+	public final static String SQL_INSERT_COUNTRY_POR_ID = "insert into countries_ass country_id = ?, country_name = ?, region_id = ? ";
+
 	/**
 	 * Constructor
 	 * 
@@ -54,9 +58,9 @@ public class CountryDAO implements CountryDAOI {
 		try {
 //			Statement stm = conn.createStatement();
 //			rs = stm.executeQuery(SQL_LEER_COUNTRY_POR_ID + "'" + country_id + "'");
-			//con preparedStatement
+			// con preparedStatement
 			/**
-			 * PREPARED STATEMENT CON ? 
+			 * PREPARED STATEMENT CON ?
 			 */
 			PreparedStatement ps = conn.prepareStatement(SQL_LEER_COUNTRY_POR_ID2);
 			ps.setString(1, country_id);
@@ -95,21 +99,36 @@ public class CountryDAO implements CountryDAOI {
 		return salida;
 	}
 
+	/**
+	 * Ejemplo con MontadorSQL
+	 */
 	@Override
-	public int actualizar(Country country) throws Exception {
-		try {
-			PreparedStatement ps = conn.prepareStatement(SQL_UPDATE_COUNTRY_POR_ID);
-			ps.setString(1, country.getCountry_id());
-			ps.setString(2, country.getCountry_name());
-			ps.setString(3, country.getRegion_id());
-			ps.setString(4, country.getCountry_id());
-			System.out.println("Country modificada");
-			return ps.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new Exception(SQL_UPDATE_COUNTRY_POR_ID + " " + e.getMessage());
-		}
+	public int actualizar(Country country) throws SQLException {
+		String sql = "Update countries_ass set " + montaSqlU(country);
+		sql += " where ";
+		sql = MontadorSQL.addSalida(sql, "country_id", country.getCountry_id(), " ");
+		System.out.println(sql);
+		Statement stm = conn.createStatement();
+		return stm.executeUpdate(sql);
 	}
+
+	/**
+	 * Método actualizar primera versión
+	 */
+//	public int actualizar(Country country) throws Exception {
+//		try {
+//			PreparedStatement ps = conn.prepareStatement(SQL_UPDATE_COUNTRY_POR_ID);
+//			ps.setString(1, country.getCountry_id());
+//			ps.setString(2, country.getCountry_name());
+//			ps.setString(3, country.getRegion_id());
+//			ps.setString(4, country.getCountry_id());
+//			System.out.println("Country modificada");
+//			return ps.executeUpdate();
+//
+//		} catch (SQLException e) {
+//			throw new Exception(SQL_UPDATE_COUNTRY_POR_ID + " " + e.getMessage());
+//		}
+//	}
 
 	@Override
 	public int delete(Country country) throws Exception {
@@ -158,6 +177,36 @@ public class CountryDAO implements CountryDAOI {
 		ctr.setRegion_id(rs.getString("region_id"));
 
 		return ctr;
+	}
+
+	/**
+	 * Método para hacer update
+	 * 
+	 * @param country
+	 * @return
+	 */
+	public String montaSqlU(Country country) {
+		String salida = "";
+		salida = MontadorSQL.addSalida(salida, "country_id", country.getCountry_id(), ",");
+		salida = MontadorSQL.addSalida(salida, "country_name", country.getCountry_name(), ",");
+		salida = MontadorSQL.addSalida(salida, "region_id", country.getRegion_id(), ",");
+
+		return salida;
+	}
+
+	/**
+	 * Método para hacer insert
+	 * 
+	 * @param country
+	 * @return
+	 */
+	public String montaSqlI(Country country) {
+		String salida = "";
+		salida = MontadorSQL.addSalida(salida, "", country.getCountry_id(), ",");
+		salida = MontadorSQL.addSalida(salida, "", country.getCountry_name(), ",");
+		salida = MontadorSQL.addSalida(salida, "", country.getRegion_id(), ",");
+
+		return salida;
 	}
 
 }
