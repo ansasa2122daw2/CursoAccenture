@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import rf.curso.maven.ProyectoPrueba.dao.CountryDAO;
+import rf.curso.maven.ProyectoPrueba.dao.CountryDAOI;
 import rf.curso.maven.ProyectoPrueba.dominio.Country;
 
 /**
@@ -14,8 +15,8 @@ import rf.curso.maven.ProyectoPrueba.dominio.Country;
  */
 
 public class CountryController {
-	//lamamos
-	CountryDAO cDao;
+	//lamamos a la interface
+	CountryDAOI cDao;
 	
 	/**
 	 * constructor donde declaramos cDao
