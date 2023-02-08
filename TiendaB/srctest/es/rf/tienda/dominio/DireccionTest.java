@@ -24,34 +24,4 @@ class DireccionTest {
 		assertEquals(NOMBREOK, dir.getDir_nombre());
 	}
 
-	@Test
-	void testSetDir_direccion() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testSetDir_poblacion() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testSetcPostal() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testSetDir_provincia() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testSetDir_pais() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testSetDir_correoE() {
-		fail("Not yet implemented");
-	}
-
 }
